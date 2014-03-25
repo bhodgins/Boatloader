@@ -5,15 +5,20 @@ local commands = {}
 
 local function cliCMD(cmd)
 	local command = {}
-	for word in input:gmatch("%S+") do table.insert(command, word) end
-		local shellArgs = {}
-		for item in commands do
-			if not item == 1 then
-				table.insert(shellArgs, commands[item])
-			end
+	for word in cmd:gmatch("%S+") do table.insert(command, word) end
+	local shellArgs = {}
+	for item in ipairs(command) do
+		if not item == 1 then
+			table.insert(shellArgs, command[item])
 		end
-	local currentFunction = command[commands[1]]
-	currentFunction(shellArgs)
+	end
+	local currentFunction = commands[command[1]]
+	print(type(currentFunction))
+	if type(currentFunction) == "function" then
+		currentFunction(shellArgs)
+	else
+		print("Error: No such Command: "..command[1])
+	end
 end
 
 local function cliDoFile(file)
@@ -24,19 +29,25 @@ end
 
 local function cliInit()
 	-- LOOOOGOOOO!!!!
-	local logo= "       _~       \n    _~ )_)_~    \n    )_))_))_)   \n    _!__!__!_   \n  ~~\\______t/~~ \n  ~~~~~~~~~~~~~ \n  |BOATYLOADER| \n   \\——V1.0——-/  \n"
+	local logo= "       __       \n    __ )_)__    \n    )_))_))_)   \n    _!__!__!_   \n  ~~\\______t/~~ \n  ~~~~~~~~~~~~~ \n  |BOATYLOADER| \n   \\--V1.0---/  \n"
 	print(logo)
 	-- Making functions available to the cli:
-	commands["print"] = print
+	commands["print"] = printCLI
+end
+
+local function printCLI(h)
+	for i in h do
+		print(h[i])
+	end
 end
 
 local function cli()
 	cliInit()
 	local running = true
 	while running do
+		write("-> ")
+		local input = read()
 		if not (input == "quit") then
-			write("> ")
-			local input = read()
 			cliCMD(input)
 		else
 			running = false
