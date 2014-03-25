@@ -20,7 +20,6 @@ end
 local function cliCMD(cmd)
 	local command = {}
 	for word in input:gmatch("%S+") do table.insert(command, word) end
-	
 		local shellArgs = {}
 		for item in commands do
 			if not item == 1 then
