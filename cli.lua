@@ -2,6 +2,7 @@
 -- Basic CLI, made for BoatLoader
 
 local function cli(commands)
+	
 	local running = true
 	while running do
 		local input = read()
@@ -18,6 +19,8 @@ local function cli(commands)
 			end
 			local currentFunction = command[commands[1]]
 			currentFunction[shellArgs]
+		else
+			running = false
 		end
 	end
 end
