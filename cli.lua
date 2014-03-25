@@ -1,3 +1,6 @@
+-- CLI.lua
+-- Basic CLI, made for BoatLoader
+
 local function cli(commands)
 	local running = true
 	while running do
@@ -15,8 +18,7 @@ local function cli(commands)
 			end
 			local currentFunction = command[commands[1]]
 			currentFunction[shellArgs]
-		else
-			
 		end
 	end
 end
+-- End CLI.lua
