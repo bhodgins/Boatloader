@@ -2,9 +2,9 @@
 -- Basic CLI, made for BoatLoader
 
 local function cli(commands)
-	
 	local running = true
 	while running do
+		write("> ")
 		local input = read()
 		command = {}
 		for word in input:gmatch("%S+") do table.insert(commands, word) end
@@ -12,13 +12,13 @@ local function cli(commands)
 			local shellArgs
 			for item in commands do
 				if not item == 1 then
-					
+					-- Nothing
 				else
 					table.insert(commands[item])
 				end
 			end
 			local currentFunction = command[commands[1]]
-			currentFunction[shellArgs]
+			currentFunction(shellArgs)
 		else
 			running = false
 		end
