@@ -21,8 +21,15 @@ end
 
 local function cliDoFile(file)
 	--local handle = fs.open(file, fs.exists(file) and "a" or "w")
-	local handle = fs.open(handle, "r")
-	-- TODO
+	local handle = fs.open(file, "r")
+	while not finished do
+		line = handle.readLine()
+		if not line == nil then
+			cliCMD(line)
+		else
+			finished = true
+		end
+	end
 end
 
 local function cliInit()
