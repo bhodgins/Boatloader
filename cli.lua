@@ -38,6 +38,9 @@ local function cliInit()
 	print(logo)
 	-- Making functions available to the cli:
 	commands["print"] = printTable
+	commands["boot"] = boot
+	commands["image"] = image
+	commands["append"] = append
 end
 
 
