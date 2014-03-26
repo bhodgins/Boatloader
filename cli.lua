@@ -12,12 +12,14 @@ local function cliCMD(cmd)
 			table.insert(shellArgs, command[item])
 		end
 	end
-	local currentFunction = commands[command[1]]
-	print(type(currentFunction))
-	if type(currentFunction) == "function" then
-		currentFunction(shellArgs)
-	else
-		print("Error: No such Command: "..command[1])
+	local onlySpaces
+	if not (commands == nil or command[1] == nil) then
+		local currentFunction = commands[command[1]]
+		if type(currentFunction) == "function" then
+			currentFunction(shellArgs)
+		else
+			print("Error: No such Command: "..command[1])
+		end
 	end
 end
 
@@ -27,19 +29,20 @@ local function cliDoFile(file)
 	-- TODO
 end
 
+local function printTable(h)
+	for i in ipairs(h) do
+		print(h[i])
+	end
+end
+
 local function cliInit()
 	-- LOOOOGOOOO!!!!
 	local logo= "       __       \n    __ )_)__    \n    )_))_))_)   \n    _!__!__!_   \n  ~~\\______t/~~ \n  ~~~~~~~~~~~~~ \n  |BOATYLOADER| \n   \\--V1.0---/  \n"
 	print(logo)
 	-- Making functions available to the cli:
-	commands["print"] = printCLI
+	commands["print"] = printTable
 end
 
-local function printCLI(h)
-	for i in h do
-		print(h[i])
-	end
-end
 
 local function cli()
 	cliInit()
