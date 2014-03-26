@@ -25,12 +25,6 @@ local function cliDoFile(file)
 	-- TODO
 end
 
-local function printTable(h)
-	for i in ipairs(h) do
-		print(h[i])
-	end
-end
-
 local function cliInit()
 	-- LOOOOGOOOO!!!!
 	local logo= "       __       \n    __ )_)__    \n    )_))_))_)   \n    _!__!__!_   \n  ~~\\______t/~~ \n  ~~~~~~~~~~~~~ \n  |BOATYLOADER| \n   \\--V1.0---/  \n"
