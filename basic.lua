@@ -53,27 +53,6 @@ local tKeys = {
 	"delete"								-- 211
 }
 
-
-loadfile = function( _sFile )
-	local file = fs.open( _sFile, "r" )
-	if file then
-		local func, err = loadstring( file.readAll(), fs.getName( _sFile ) )
-		file.close()
-		return func, err
-	end
-	return nil, "File not found"
-end
-
-dofile = function( _sFile )
-	local fnFile, e = loadfile( _sFile )
-	if fnFile then
-		setfenv( fnFile, getfenv(2) )
-		return fnFile()
-	else
-		error( e, 2 )
-	end
-end
-
 local keys = getfenv()
 for nKey, sKey in pairs( tKeys ) do
 	keys[sKey] = nKey
