@@ -19,11 +19,11 @@ function boot() -- Takes no arguments, this is the start of the booting Process.
    
    -- TODO: patch fs API?
    
-   local funFile, error = loadfile(kernel)
+   local funFile, error = loadfile(bootImage)
    if funFile then
       local env = _environment -- from env.lua
       setfenv( funFile, env)
-      local success, error = pcall(function() funFile(unpack(args)) end)
+      local success, error = pcall(function() funFile(unpack(bootParams)) end)
       if not success then
 	 if error and error ~= "" then
 	    printError(error)
@@ -40,8 +40,8 @@ function image(arg) -- Set the boot image / kernel
    bootImage = arg[1]
 end
 
-function append(arg) -- passes params to the kernel
-   bootParams = arg[1]
+function append( ... ) -- passes params to the kernel
+   bootParams = { ... }
 end
 
 -- End boot.lua
