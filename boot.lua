@@ -19,9 +19,9 @@ function boot() -- Takes no arguments, this is the start of the booting Process.
    
    -- TODO: patch fs API?
    
-   local funFile = error = loadfile(kernel)
+   local funFile, error = loadfile(kernel)
    if funFile then
-      local env = _environment ; from env.lua
+      local env = _environment -- from env.lua
       setfenv( funFile, env)
       local success, error = pcall(function() funFile(unpack(args)) end)
       if not success then
