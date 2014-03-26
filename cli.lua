@@ -7,15 +7,11 @@ local function cliCMD(cmd)
 	local command = {}
 	for word in cmd:gmatch("%S+") do table.insert(command, word) end
 	local shellArgs = {}
-	for item in ipairs(command) do
-		if not item == 1 then
-			table.insert(shellArgs, command[item])
-		end
-	end
-	local onlySpaces
+	local shellArgs = command
 	if not (commands == nil or command[1] == nil) then
 		local currentFunction = commands[command[1]]
 		if type(currentFunction) == "function" then
+			table.remove(shellArgs, 1)
 			currentFunction(shellArgs)
 		else
 			print("Error: No such Command: "..command[1])
