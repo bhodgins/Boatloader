@@ -2,6 +2,7 @@
 -- Basic CLI, made for BoatLoader
 
 local commands = {}
+local functionNames = {}
 
 local function cliCMD(cmd)
 	local command = {}
@@ -34,6 +35,7 @@ end
 
 local function addCMD(cmdName, cmd)
 	if not (type(cmdName) == "string" and type(cmd) == "function") then
+		table.insert(functionNames, cmdName)
 		commands[cmdName] = cmd
 	else
 		if not type(cmdName) == "string" then
@@ -66,7 +68,7 @@ local function cli()
 		elseif input == "help" then
 			print("Available Functions: ")
 			local availableCommands = ""
-			for i,l in ipairs(commands) do
+			for i,l in ipairs(functionNames) do
 				write(l..", ")
 			end
 			write("help")
