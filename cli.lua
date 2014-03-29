@@ -10,14 +10,7 @@ local function cliCMD(cmd)
 	local shellArgs = command
 	if not (commands == nil or command[1] == nil) then
 		local currentFunction = commands[command[1]]
-		if command[1] == "help" then
-			print("Available Functions: ")
-			local availableCommands = ""
-			for i,l in ipairs(commands) do
-				write(l..", ")
-			end
-			write("help")
-		elseif type(currentFunction) == "function" then
+		if type(currentFunction) == "function" then
 			table.remove(shellArgs, 1)
 			local currentFunction = commands[command[1]]
 			currentFunction(shellArgs)
@@ -71,6 +64,13 @@ local function cli()
 		local input = read()
 		if not (input == "quit") then
 			cliCMD(input)
+		elseif input == "help" then
+			print("Available Functions: ")
+			local availableCommands = ""
+			for i,l in ipairs(commands) do
+				write(l..", ")
+			end
+			write("help")
 		else
 			running = false
 		end
