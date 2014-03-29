@@ -1,5 +1,5 @@
 -- clifunc.lua
--- Adding the functions for the CLI
+-- Adding the basic functions for the CLI
 
 local function printTable(h)
 	for i in ipairs(h) do

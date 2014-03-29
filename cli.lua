@@ -13,6 +13,14 @@ local function cliCMD(cmd)
 		if type(currentFunction) == "function" then
 			table.remove(shellArgs, 1)
 			currentFunction(shellArgs)
+		elseif command[1] == "help" then
+			print("Available Functions: ")
+			local availableCommands = ""
+			for l,n in ipairs() do
+				availableCommands = availableCommands..n..", "
+			end
+			availableCommands = availableCommands.."help"
+			print(availableCommands)
 		else
 			print("Error: No such Command: "..command[1])
 		end
@@ -32,15 +40,24 @@ local function cliDoFile(file)
 	end
 end
 
+local function addCMD(cmdName, cmd)
+	if not cmdName == nil or cmd == nil then
+		commands[cmdName] = cmd
+	else
+		if cmd == nil then
+			print("Error: addCMD: cmd not set!")
+		elseif cmdName == nil
+			print("Error: addCMD: cmdName not set!")
+		end
+	end
+end
+
 local function cliInit()
 	-- LOOOOGOOOO!!!!
 	local logo= "       __       \n    __ )_)__    \n    )_))_))_)   \n    _!__!__!_   \n  ~~\\______t/~~ \n  ~~~~~~~~~~~~~ \n  |BOATYLOADER| \n   \\--V1.0---/  \n"
 	print(logo)
 	-- Making functions available to the cli:
-	commands["print"] = printTable
-	commands["boot"] = boot
-	commands["image"] = image
-	commands["append"] = append
+	addCMD("print", printTable)
 end
 
 
