@@ -14,7 +14,7 @@ local function cliCMD(cmd)
 			print("Available Functions: ")
 			local availableCommands = ""
 			for i,l in ipairs(commands) do
-				write(n..", ")
+				write(l..", ")
 			end
 		elseif type(currentFunction) == "function" then
 			table.remove(shellArgs, 1)
