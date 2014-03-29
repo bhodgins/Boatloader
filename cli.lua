@@ -11,10 +11,9 @@ local function cliCMD(cmd)
 	if not (commands == nil or command[1] == nil) then
 		local currentFunction = commands[command[1]]
 		if type(currentFunction) == "function" then
-			table.remove(shellArgs, 1)
-			local currentFunction = commands[command[1]]
+			table.remove(shellArgs, 1)	
 			currentFunction(shellArgs)
-			else
+		else
 			print("Error: No such Command: "..command[1])
 		end
 	end
@@ -35,7 +34,7 @@ end
 
 local function addCMD(cmdName, cmd)
 	if not cmdName == nil and not cmd == nil then
-	commands[cmdName] = cmd
+		commands[cmdName] = cmd
 	else
 		if cmd == nil then
 		print("Error: addCMD: cmd not set!")
@@ -62,8 +61,8 @@ local function cli()
 	while running do
 		write("-> ")
 		local input = read()
-		if not (input == "quit") then
-			cliCMD(input)
+		if input == "quit" then
+			running = false
 		elseif input == "help" then
 			print("Available Functions: ")
 			local availableCommands = ""
@@ -72,7 +71,7 @@ local function cli()
 			end
 			write("help")
 		else
-			running = false
+			cliCMD(input)
 		end
 	end
 end
