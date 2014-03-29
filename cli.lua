@@ -33,7 +33,7 @@ local function cliDoFile(file)
 end
 
 local function addCMD(cmdName, cmd)
-	if not cmdName == nil and not cmd == nil then
+	if not (cmdName == nil and cmd == nil) then
 		commands[cmdName] = cmd
 	else
 		if cmd == nil then
