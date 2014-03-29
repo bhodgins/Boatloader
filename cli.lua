@@ -46,7 +46,7 @@ local function addCMD(cmdName, cmd)
 	else
 		if cmd == nil then
 			print("Error: addCMD: cmd not set!")
-		elseif cmdName == nil
+		elseif cmdName == nil then
 			print("Error: addCMD: cmdName not set!")
 		end
 	end
@@ -76,4 +76,3 @@ local function cli()
 end
 
 -- End CLI.lua
-cli()
