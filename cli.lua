@@ -17,11 +17,10 @@ local function cliCMD(cmd)
 			print("Available Functions: ")
 			local availableCommands = ""
 			for l,n in ipairs() do
-				availableCommands = availableCommands..n..", "
+				write(n..", ")
 			end
-			availableCommands = availableCommands.."help"
-			print(availableCommands)
-		else
+			write("help")
+			else
 			print("Error: No such Command: "..command[1])
 		end
 	end
