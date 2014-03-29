@@ -17,11 +17,6 @@ local function cliCMD(cmd)
 				write(n..", ")
 			end
 		elseif type(currentFunction) == "function" then
-			print("Available Functions: ")
-			local availableCommands = ""
-			for l,n in ipairs() do
-				write(n..", ")
-			end
 			table.remove(shellArgs, 1)
 			local currentFunction = commands[command[1]]
 			currentFunction(shellArgs)
@@ -46,7 +41,7 @@ local function cliDoFile(file)
 end
 
 local function addCMD(cmdName, cmd)
-	if not cmdName == nil or cmd == nil then
+	if not cmdName == nil or not cmd == nil then
 		commands[cmdName] = cmd
 	else
 		if cmd == nil then
