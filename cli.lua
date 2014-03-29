@@ -33,13 +33,13 @@ local function cliDoFile(file)
 end
 
 local function addCMD(cmdName, cmd)
-	if not (cmdName == nil and cmd == nil) then
+	if not (type(cmdName) == "string" and type(cmd) == "function") then
 		commands[cmdName] = cmd
 	else
-		if cmd == nil then
-		print("Error: addCMD: cmd not set!")
-	elseif cmdName == nil then
-		print("Error: addCMD: cmdName not set!")
+		if not type(cmdName) == "string" then
+			print("Error: addCMD: cmd not type string!")
+		elseif not type(cmd) == "function" then
+			print("Error: addCMD: cmdName not type string!")
  		end
 	end
 end
