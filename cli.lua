@@ -16,11 +16,11 @@ local function cliCMD(cmd)
 			for i,l in ipairs(commands) do
 				write(l..", ")
 			end
+			write("help")
 		elseif type(currentFunction) == "function" then
 			table.remove(shellArgs, 1)
 			local currentFunction = commands[command[1]]
 			currentFunction(shellArgs)
-			write("help")
 			else
 			print("Error: No such Command: "..command[1])
 		end
@@ -41,15 +41,15 @@ local function cliDoFile(file)
 end
 
 local function addCMD(cmdName, cmd)
-	if not cmdName == nil or not cmd == nil then
-		commands[cmdName] = cmd
-	else
-		if cmd == nil then
-			print("Error: addCMD: cmd not set!")
-		elseif cmdName == nil then
-			print("Error: addCMD: cmdName not set!")
-		end
-	end
+	-- if not cmdName == nil or not cmd == nil then
+	commands[cmdName] = cmd
+	-- else
+	-- 	if cmd == nil then
+	-- 		print("Error: addCMD: cmd not set!")
+	-- 	elseif cmdName == nil then
+	-- 		print("Error: addCMD: cmdName not set!")
+	-- 	end
+	-- end
 end
 
 local function cliInit()
@@ -58,6 +58,8 @@ local function cliInit()
 	print(logo)
 	-- Making functions available to the cli:
 	addCMD("print", printTable)
+	addCMD("do", cliDoFile)
+	addCMD("lua", luaCMD)
 end
 
 

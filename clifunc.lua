@@ -7,4 +7,12 @@ local function printTable(h)
 	end
 end
 
+local function luaCMD(arg)
+	local argString = ""
+	for i in ipairs(arg) do
+		argstring = argstring.. arg[i]
+	end
+	loadstring(argString)()
+end
+
 -- End clifunc.lua
