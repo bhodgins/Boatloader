@@ -34,15 +34,15 @@ local function cliDoFile(file)
 end
 
 local function addCMD(cmdName, cmd)
-	-- if not cmdName == nil or not cmd == nil then
+	if not cmdName == nil and not cmd == nil then
 	commands[cmdName] = cmd
-	-- else
-	-- 	if cmd == nil then
-	-- 		print("Error: addCMD: cmd not set!")
-	-- 	elseif cmdName == nil then
-	-- 		print("Error: addCMD: cmdName not set!")
-	-- 	end
-	-- end
+	else
+		if cmd == nil then
+		print("Error: addCMD: cmd not set!")
+	elseif cmdName == nil then
+		print("Error: addCMD: cmdName not set!")
+ 		end
+	end
 end
 
 local function cliInit()
