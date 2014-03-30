@@ -2,8 +2,8 @@
 -- Basic CLI, made for BoatLoader
 
 local commands = {}
-local exitFunc
-local exitArgs
+local exitFunc = nil
+local exitArgs = nil
 
 local function cliCMD(cmd)
 	local command = {}
@@ -52,12 +52,12 @@ end
 
 
 local function cli(cmd)
+	local running = true
 	cliInit()
 	if cmd then
 		cli(cmd)
 		cmd = nil
 	else
-		local running = true
 		while running do
 			write("-> ")
 			local input = read()
@@ -77,8 +77,8 @@ local function cli(cmd)
 			local funcreturn = nil
 			funcreturn = exitFunc(exitArgs)
 			exitFunc = nil
-			if funcreturn then
-				if (funcreturn == "reboot" or funcreturn) then
+			if not funcreturn == nil then
+				if (funcreturn == "reboot" or funcreturn == true) then
 					cliCMD("boot")
 				elseif funcreturn == "bootloader" then
 					cli()
