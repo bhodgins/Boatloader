@@ -75,6 +75,7 @@ local function cli(cmd)
 		end
 		if exitFunc then
 			local funcreturn = exitFunc(exitArgs)
+			exitFunc = nil
 			if funcreturn then
 				if (funcreturn == "reboot" or funcreturn) then
 					cliCMD("boot")
