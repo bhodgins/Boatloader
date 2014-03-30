@@ -1,7 +1,12 @@
 -- cliextra.lua
 -- Extra functions for the CLI
 
-addCMD("boot", boot)
+local function bootInit()
+	exitFunc = boot
+	running = false
+end
+
+addCMD("boot", bootInit)
 addCMD("image", image)
 addCMD("append", append)
 

@@ -2,6 +2,8 @@
 -- Basic CLI, made for BoatLoader
 
 local commands = {}
+local exitFunc
+local exitArgs
 
 local function cliCMD(cmd)
 	local command = {}
@@ -49,22 +51,40 @@ local function cliInit()
 end
 
 
-local function cli()
+local function cli(cmd)
 	cliInit()
-	local running = true
-	while running do
-		write("-> ")
-		local input = read()
-		if input == "quit" then
-			running = false
-		elseif input == "help" then
-			print("Available Functions: ")
-			for i in pairs(commands) do
-			   write(i .. ", ")
+	if cmd then
+		cli(cmd)
+		cmd = nil
+	else
+		local running = true
+		while running do
+			write("-> ")
+			local input = read()
+			if input == "quit" then
+				running = false
+			elseif input == "help" then
+				print("Available Functions: ")
+				for i in pairs(commands) do
+				   write(i .. ", ")
+				end
+				print("help and quit")
+			else
+				cliCMD(input)
 			end
-			print("help and quit")
-		else
-			cliCMD(input)
+		end
+		if exitFunc then
+			local funcreturn = exitFunc(exitArgs)
+			if funcreturn then
+				if (funcreturn == "reboot" or funcreturn) then
+					cliCMD("boot")
+				elseif funcreturn == "bootloader" then
+					cli()
+					nativeShutdown()
+				end
+			else
+				nativeShutdown()
+			end
 		end
 	end
 end
