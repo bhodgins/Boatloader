@@ -2,14 +2,14 @@
 -- This file does the OS loading
 
 local bootImage
-local bootParams
+local bootParams = {}
 
 function boot() -- Takes no arguments, this is the start of the booting Process.
    local osConf
    local u = {}
 
    if not bootImage then
-      print("No image specified")
+      print("boot: No image specified")
       return false
    end
    
@@ -20,19 +20,21 @@ function boot() -- Takes no arguments, this is the start of the booting Process.
    -- TODO: patch fs API?
    
    local funFile, error = loadfile(bootImage)
+   if error and error ~= "" then
+      print(error)
+   end
+
    if funFile then
-      local env = _environment -- from env.lua
+      local env = newEnv -- from env.lua
       setfenv( funFile, env)
       local success, error = pcall(function() funFile(unpack(bootParams)) end)
       if not success then
 	 if error and error ~= "" then
-	    printError(error)
+	    print(error)
 	 end
 	 return false
       end
       return false
-   else
-      print("No image specified")
    end
 end
 

@@ -2,7 +2,6 @@
 -- Basic CLI, made for BoatLoader
 
 local commands = {}
-local functionNames = {}
 
 local function cliCMD(cmd)
 	local command = {}
@@ -34,15 +33,8 @@ local function cliDoFile(file)
 end
 
 local function addCMD(cmdName, cmd)
-	if not (type(cmdName) == "string" and type(cmd) == "function") then
-		table.insert(functionNames, cmdName)
+	if (type(cmdName) == "string" and type(cmd) == "function") then
 		commands[cmdName] = cmd
-	else
-		if not type(cmdName) == "string" then
-			print("Error: addCMD: cmd not type string!")
-		elseif not type(cmd) == "function" then
-			print("Error: addCMD: cmdName not type string!")
- 		end
 	end
 end
 
@@ -67,11 +59,10 @@ local function cli()
 			running = false
 		elseif input == "help" then
 			print("Available Functions: ")
-			local availableCommands = ""
-			for i,l in ipairs(functionNames) do
-				write(l..", ")
+			for i,l in pairs(commands) do
+			   write(i .. ", ")
 			end
-			write("help")
+			write("\n")
 		else
 			cliCMD(input)
 		end
