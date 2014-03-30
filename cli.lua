@@ -74,7 +74,8 @@ local function cli(cmd)
 			end
 		end
 		if exitFunc then
-			local funcreturn = exitFunc(exitArgs)
+			local funcreturn = nil
+			funcreturn = exitFunc(exitArgs)
 			exitFunc = nil
 			if funcreturn then
 				if (funcreturn == "reboot" or funcreturn) then
