@@ -59,10 +59,10 @@ local function cli()
 			running = false
 		elseif input == "help" then
 			print("Available Functions: ")
-			for i,l in pairs(commands) do
+			for i in pairs(commands) do
 			   write(i .. ", ")
 			end
-			write("\n")
+			print("help and quit")
 		else
 			cliCMD(input)
 		end
