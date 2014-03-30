@@ -1,6 +1,7 @@
 -- CLI.lua
 -- Basic CLI, made for BoatLoader
 
+local running = true
 local commands = {}
 local exitFunc = nativeShutdown
 local exitArgs = nil
@@ -52,7 +53,6 @@ end
 
 
 local function cli(cmd)
-	local running = true
 	cliInit()
 	if cmd then
 		cli(cmd)
