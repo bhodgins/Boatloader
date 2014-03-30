@@ -45,15 +45,24 @@ local function cliInit()
 	-- LOOOOGOOOO!!!!
 	local logo= "       __       \n    __ )_)__    \n    )_))_))_)   \n    _!__!__!_   \n  ~~\\______t/~~ \n  ~~~~~~~~~~~~~ \n  |BOATYLOADER| \n   \\--V1.0---/  \n"
 	print(logo)
+	if not (fs.exists("/.boot") and fs.isDir("/.boot")) then
+		fs.makeDir("/.boot")
+	end
+	if fs.exists("/.boot/autorun") then
+		cliDoFile("/.boot/autorun")
+	else
+		startupCreator("/.boot/autorun")
+		os.shutdown()
+	end
 	-- Making functions available to the cli:
 	addCMD("print", printTable)
 	addCMD("do", cliDoFile)
 	addCMD("lua", luaCMD)
+	cli()
 end
 
 
 local function cli(cmd)
-	cliInit()
 	if cmd then
 		cli(cmd)
 		cmd = nil

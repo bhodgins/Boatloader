@@ -10,6 +10,6 @@ addCMD("boot", bootInit)
 addCMD("image", image)
 addCMD("append", append)
 
-cli() -- Run it!
+cliInit() -- Run it!
 
 -- End cliextra.lua
