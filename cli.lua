@@ -73,7 +73,7 @@ local function cli(cmd)
 				cliCMD(input)
 			end
 		end
-		if exitFunc then
+		if not exitFunc == nil then
 			local funcreturn = nil
 			funcreturn = exitFunc(exitArgs)
 			exitFunc = nil
