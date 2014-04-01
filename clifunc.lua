@@ -15,7 +15,7 @@ local function luaCMD(arg)
 	loadstring(argString)()
 end
 
-function startupCreator(file)
+function startupCreator(file) -- Buggy Startup Creator
 	fs.delete(file)
 	print("Hello!\nThis is the Setup of BoatLoader!\n")
 	sleep(1)
@@ -24,8 +24,8 @@ function startupCreator(file)
 	while not success do
 		print("Please Input the desired Profile, or type new:")
 		print("Available Profiles: craftos")
-		profileSelection = read()
-		if profileSelection == "craftos" or "" then
+		local profileSelection = read()
+		if profileSelection == "craftos" or profileSelection == "" then
 			path = "/rom/programs/shell"
 			print("You choose CraftOS!")
 			success = true
