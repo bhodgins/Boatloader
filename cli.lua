@@ -25,19 +25,31 @@ end
 local function cliDoFile(file)
 	--local handle = fs.open(file, fs.exists(file) and "a" or "w")
 	local handle = fs.open(file, "r")
-	while not finished do
-		line = handle.readLine()
-		if line ~= nil then
-			cliCMD(line)
-		else
-			finished = true
-		end
+	if handle == nil then return false end
+	for line in handle.readLine do
+		cliCMD(line)
 	end
+	handle.close()
+	return true
 end
 
 local function addCMD(cmdName, cmd)
 	if (type(cmdName) == "string" and type(cmd) == "function") then
 		commands[cmdName] = cmd
+	end
+end
+
+local function exitHandeler()
+	local funcreturn = nil
+	funcreturn = exitFunc(exitArgs)
+	if not funcreturn == nil then
+		if (funcreturn == "reboot" or funcreturn == true) then
+			cliCMD("boot")
+		elseif funcreturn == "bootloader" then
+			cli()
+		end
+	else
+		nativeShutdown()
 	end
 end
 
@@ -61,26 +73,18 @@ local function cli(cmd)
 				cliCMD(input)
 			end
 		end
-		local funcreturn = nil
-		funcreturn = exitFunc(exitArgs)
-		exitFunc = nativeShutdown
-		if not funcreturn == nil then
-			if (funcreturn == "reboot" or funcreturn == true) then
-				cliCMD("boot")
-			elseif funcreturn == "bootloader" then
-				cli()
-				nativeShutdown()
-			end
-		else
-			nativeShutdown()
-		end
 	end
+	exitHandeler()
 end
 
 local function cliInit()
 	-- LOOOOGOOOO!!!!
 	local logo= "       __       \n    __ )_)__    \n    )_))_))_)   \n    _!__!__!_   \n  ~~\\______t/~~ \n  ~~~~~~~~~~~~~ \n  |BOATYLOADER| \n   \\--V1.0---/  \n"
 	print(logo)
+	-- Making functions available to the cli:
+	addCMD("print", printTable)
+	addCMD("do", cliDoFile)
+	addCMD("lua", luaCMD)
 	if not (fs.exists("/.boot") and fs.isDir("/.boot")) then
 		fs.makeDir("/.boot")
 	end
@@ -90,10 +94,6 @@ local function cliInit()
 		startupCreator("/.boot/autorun")
 		os.shutdown()
 	end
-	-- Making functions available to the cli:
-	addCMD("print", printTable)
-	addCMD("do", cliDoFile)
-	addCMD("lua", luaCMD)
 	cli()
 end
 
