@@ -4,7 +4,7 @@
 local function bootInit()
 	exitFunc = boot
 	running = false
-	exitHandeler()
+	exitHandler()
 end
 
 addCMD("boot", bootInit)

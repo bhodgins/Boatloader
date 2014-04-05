@@ -39,7 +39,7 @@ local function addCMD(cmdName, cmd)
 	end
 end
 
-local function exitHandeler()
+local function exitHandler()
 	local funcreturn = nil
 	funcreturn = exitFunc(exitArgs)
 	if not funcreturn == nil then
@@ -73,7 +73,7 @@ local function cli(cmd)
 				cliCMD(input)
 			end
 		end
-		exitHandeler()
+		exitHandler()
 	end
 end
 
