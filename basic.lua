@@ -1,4 +1,4 @@
--- Basic.lua
+-- basic.lua
 -- Implements CC's Basic functions.
 -- Credit: Dan200
 
@@ -396,4 +396,4 @@ function write( sText )
 	return nLinesPrinted
 end
 
--- End Basic.lua
+-- End basic.lua

@@ -1,4 +1,4 @@
--- CLI.lua
+-- cli.lua
 -- Basic CLI, made for BoatLoader
 
 local running = true
@@ -98,4 +98,4 @@ local function cli(cmd)
 	end
 end
 
--- End CLI.lua
+-- End cli.lua

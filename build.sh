@@ -1,12 +1,13 @@
 #!/bin/sh
-rm bios.lua
-echo "" > bios.lua
+if [ -e bios.lua ]; then
+	rm bios.lua
+fi
 
-# The order here is critical!:
+# The order here is critical!
 declare -a SRCFILES=('basic.lua' 'clifunc.lua' 'boot.lua' 'cli.lua' 'cliextra.lua')
-echo "building..."
-for file in ${SRCFILES[@]}
-do
+echo Building BoatLoader ...
+for file in ${SRCFILES[@]}; do
 	cat ${file} >> bios.lua
-	echo ${file}
+	echo Adding ${file} ...
 done
+echo Done!

@@ -1,5 +1,5 @@
 -- boot.lua
--- This file does the OS loading
+-- Does the OS loading
 
 local bootImage
 local bootParams = {}
