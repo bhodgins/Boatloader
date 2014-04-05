@@ -27,7 +27,7 @@ local function cliDoFile(file)
 	local handle = fs.open(file, "r")
 	while not finished do
 		line = handle.readLine()
-		if not line == nil then
+		if line ~= nil then
 			cliCMD(line)
 		else
 			finished = true
