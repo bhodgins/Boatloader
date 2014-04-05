@@ -73,8 +73,8 @@ local function cli(cmd)
 				cliCMD(input)
 			end
 		end
+		exitHandeler()
 	end
-	exitHandeler()
 end
 
 local function cliInit()
