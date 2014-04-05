@@ -84,10 +84,10 @@ end
 function read( _sReplaceChar, _tHistory )
 	term.setCursorBlink( true )
 
-    local sLine = ""
+	local sLine = ""
 	local nHistoryPos = nil
 	local nPos = 0
-    if _sReplaceChar then
+	if _sReplaceChar then
 		_sReplaceChar = string.sub( _sReplaceChar, 1, 1 )
 	end
 	
@@ -118,7 +118,7 @@ function read( _sReplaceChar, _tHistory )
 			redraw()
 			
 		elseif sEvent == "key" then
-		    if param == keys.enter then
+			if param == keys.enter then
 				-- Enter
 				break
 				
@@ -138,7 +138,7 @@ function read( _sReplaceChar, _tHistory )
 				end
 			
 			elseif param == keys.up or param == keys.down then
-                -- Up or down
+				-- Up or down
 				if _tHistory then
 					redraw(" ")
 					if param == keys.up then
@@ -159,14 +159,14 @@ function read( _sReplaceChar, _tHistory )
 						end						
 					end
 					if nHistoryPos then
-                    	sLine = _tHistory[nHistoryPos]
-                    	nPos = string.len( sLine ) 
-                    else
+						sLine = _tHistory[nHistoryPos]
+						nPos = string.len( sLine ) 
+					else
 						sLine = ""
 						nPos = 0
 					end
 					redraw()
-                end
+				end
 			elseif param == keys.backspace then
 				-- Backspace
 				if nPos > 0 then
@@ -250,28 +250,28 @@ end
 
 -- Install the rest of the OS api
 function os.run( _tEnv, _sPath, ... )
-    local tArgs = { ... }
-    local fnFile, err = loadfile( _sPath )
-    if fnFile then
-        local tEnv = _tEnv
-        --setmetatable( tEnv, { __index = function(t,k) return _G[k] end } )
+	local tArgs = { ... }
+	local fnFile, err = loadfile( _sPath )
+	if fnFile then
+		local tEnv = _tEnv
+		--setmetatable( tEnv, { __index = function(t,k) return _G[k] end } )
 		setmetatable( tEnv, { __index = _G } )
-        setfenv( fnFile, tEnv )
-        local ok, err = pcall( function()
-        	fnFile( unpack( tArgs ) )
-        end )
-        if not ok then
-        	if err and err ~= "" then
-	        	printError( err )
-	        end
-        	return false
-        end
-        return true
-    end
-    if err and err ~= "" then
+		setfenv( fnFile, tEnv )
+		local ok, err = pcall( function()
+			fnFile( unpack( tArgs ) )
+		end )
+		if not ok then
+			if err and err ~= "" then
+				printError( err )
+			end
+			return false
+		end
+		return true
+	end
+	if err and err ~= "" then
 		printError( err )
 	end
-    return false
+	return false
 end
 
 local nativegetmetatable = getmetatable
@@ -302,7 +302,7 @@ function os.loadAPI( _sPath )
 		fnAPI()
 	else
 		printError( err )
-        tAPIsLoading[sName] = nil
+		tAPIsLoading[sName] = nil
 		return false
 	end
 	
@@ -330,7 +330,7 @@ end
 
 -- Install globals
 function sleep( _nTime )
-    local timer = os.startTimer( _nTime )
+	local timer = os.startTimer( _nTime )
 	repeat
 		local sEvent, param = os.pullEvent( "timer" )
 	until param == timer
